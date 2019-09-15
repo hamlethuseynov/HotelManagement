@@ -1,0 +1,56 @@
+﻿@model List<Room>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="my-2">
+            <a href="@Url.Action("create")" class="btn btn-light">Əlavə Et</a>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nomrəsi</th>
+                    <th>Qiyməti</th>
+                    <th>Yetişkin sayi</th>
+                    <th>Uşaq sayı</th>
+                    <th>Yataq Növü</th>
+                    <th>Məlumat</th>
+                    <th>Şəkli</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @item.RoomNo
+                    </td>
+                    <td>@item.DailyPrice.ToString("0.00")</td>
+                    <td>@item.PersonCapacity</td>
+                    <td>@item.ChildCapacity</td>
+                    <td>@item.BedType.Type</td>
+                    <td>@item.Desc</td>
+
+                    <td>
+                        <img src="~/Uploads/@item.Photo" height="200" />
+
+                    </td>
+                    <td>
+                        <a href="@Url.Action("edit",new {id=item.Id })" class="btn btn-sm btn-info">Yenile</a>
+                        <a onclick="return confirm ('Are you sure ?')" href="@Url.Action("delete",new {id=item.Id })" class="btn btn-sm btn-danger">Sil</a>
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
